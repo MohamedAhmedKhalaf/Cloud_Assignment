@@ -2,6 +2,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from collections import Counter
+import string
 
 
 nltk.download("stopwords")
@@ -20,18 +21,18 @@ lowered_words = [word.lower() for word in word_tokens]
 
 # setting it to english
 stop_words = set(stopwords.words("english"))
+punctuation = set(string.punctuation)
 
 # Filter out stopwords
-data_without_stopwords = [word for word in lowered_words if word not in stop_words]
+filtered_words = [word for word in lowered_words if word not in stop_words and word not in punctuation]
 
-# print(data_without_stopwords)
 
 # freq of each word using counter
-freq_word = Counter(data_without_stopwords)
+freq_word = Counter(filtered_words)
 print(freq_word)
 
 # Join back the filtered text
-filtered_text = ' '.join(data_without_stopwords)
+filtered_text = ' '.join(filtered_words)
 # print(filtered_text)
 
 
